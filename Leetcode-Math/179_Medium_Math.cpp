@@ -18,27 +18,22 @@ public:
         // }
         // return ans;
 
-        // 自定义排序，但自己没想出排序方法
+        // 自定义排序，
+        // 想到了字符串排序，但想到用拼接来比较
         // lambda表达式
-        sort(nums.begin(), nums.end(), [](const int &x, const int &y) {
-            // 计算x y 和 y x 的拼接结果
-            long sx = 10, sy = 10;
-            // y在前，x在后
-            while (sx <= x) {
-                sx *= 10;
-            }
-            // x在前，y在后
-            while (sy <= y) {
-                sy *= 10;
-            }
-            return sy * x + y > sx * y + x;
+        vector<string> nums_string(nums.size());
+        for(int i=0; i<nums.size(); i++){
+            nums_string[i]=to_string(nums[i]);
+        }
+        sort(nums_string.begin(),nums_string.end(), [](const string& a, const string& b){
+            return a+b>b+a;
         });
-        if (nums[0] == 0) {
+        if(nums_string[0]=="0") {
             return "0";
         }
         string ret;
-        for (int &x : nums) {
-            ret += to_string(x);
+        for (string &x : nums_string) {
+            ret += x;
         }
         return ret;
     }
