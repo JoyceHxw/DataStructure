@@ -58,6 +58,7 @@ public:
     }
     // 验证长度为len的a的后缀和b的前缀是否相同
     // 设定长度为len比较巧妙
+    // 优化：kmp算法，构建next数组
     bool isSame(string& a, string& b, int len){
         int i=a.length()-len;
         int j=0;
