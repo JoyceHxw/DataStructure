@@ -39,5 +39,53 @@ public:
             }
         }
         return f[k + 1][0];
+
+
+        //变形，冷冻期
+        // int n=prices.size();
+        // vector<vector<int>> v(n,vector<int>(2,0));
+        // v[0][1]=-prices[0];
+        // bool isFlag=false;
+        // for(int i=1; i<n; i++){
+        //     if(isFlag){
+        //         v[i][1]=max(v[i-1][1],v[i-2][0]-prices[i]);
+        //     }
+        //     else{
+        //         v[i][1]=max(v[i-1][1],v[i-1][0]-prices[i]);
+        //     }
+        //     if(v[i-1][0]<v[i-1][1]+prices[i]){
+        //         v[i][0]=v[i-1][1]+prices[i];
+        //         isFlag=true;
+        //     }
+        //     else{
+        //         v[i][0]=v[i-1][0];
+        //         isFlag=false;
+        //     }
+        // }
+        // return v[n-1][0];
+
+        int n=prices.size();
+        vector<int> v(2,0);
+        v[1]=-prices[0];
+        bool isFlag=false;
+        int freeze;
+        for(int i=1; i<n; i++){
+            int temp=v[1];
+            if(isFlag){
+                v[1]=max(v[1],freeze-prices[i]);
+            }
+            else{
+                v[1]=max(v[1],v[0]-prices[i]);
+            }
+            if(v[0]<temp+prices[i]){
+                freeze=v[0];
+                v[0]=temp+prices[i];
+                isFlag=true;
+            }
+            else{
+                isFlag=false;
+            }
+        }
+        return v[0];
     }
 };
