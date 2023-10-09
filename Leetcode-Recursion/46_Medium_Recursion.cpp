@@ -40,6 +40,8 @@ public:
         }
     }
 
+    //注意C++的push_back是保存元素的副本，复制一份再放进去，emplace_back()是直接在末尾构造函数
+
     //交换的方式，节省空间
     // void backtrack(vector<vector<int>>& res, vector<int>& output, int first, int len){
     //     // 所有数都填完了
